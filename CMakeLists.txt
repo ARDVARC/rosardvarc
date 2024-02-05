@@ -51,6 +51,7 @@ add_message_files(
   FILES
   BluetoothAzimuthElevation.msg
   AnnotatedCameraFrame.msg
+  RecentSighting.msg
 )
 
 ## Generate services in the 'srv' folder
