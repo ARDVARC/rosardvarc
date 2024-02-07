@@ -56,6 +56,8 @@ add_message_files(
   MissionState.msg
   StateMachineCriteria.msg
   UasToRgvDirectionVectorUasFrame.msg
+  Setpoint.msg
+  RegionOfInterest.msg
 )
 
 ## Generate services in the 'srv' folder
