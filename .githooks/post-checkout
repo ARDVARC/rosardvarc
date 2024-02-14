@@ -1,0 +1,9 @@
+#!/bin/sh
+#
+# Modified from https://frankcorso.dev/automatically-run-build-scripts-switching-branches-git-hooks.html
+#
+if [ "$3" = '1' ]
+then
+    cd "../.."
+    catkin_make
+fi
