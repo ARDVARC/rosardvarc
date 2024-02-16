@@ -20,17 +20,17 @@ uint8 LOCALIZE_RGV_1 = 2
 
 # Generate setpoints that follow a search pattern (either
 # uninformed or based on last known location of RGV 2).
-uint8 FIND_RGV_1 = 3
+uint8 FIND_RGV_2 = 3
 
 # Generate setpoints based off of sensor readings of RGV 2.
 # The setpoints will try to get and keep RGV 2 in the
 # camera's field of view even as it moves.
-uint8 TRACK_RGV_1 = 4
+uint8 TRACK_RGV_2 = 4
 
 # Generate setpoints based off of sensor readings of RGV 2.
 # The setpoints will try to orbit RGV 2 and keep RGV 2 in
 # the camera's field of view.
-uint8 LOCALIZE_RGV_1 = 5
+uint8 LOCALIZE_RGV_2 = 5
 
 # Generate setpoints based off of sensor readings for both
 # RGVs. The setpoints will try to orbit the midpoint of the
