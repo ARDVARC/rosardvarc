@@ -3,6 +3,7 @@
 int8 RGV_1 = 1
 int8 RGV_2 = 2
 int8 RGV_BOTH = 3
+## TODO (TB) correct this message as we are only sending one direction vector at a time
 
 # Possible values of the `measurement_source` field
 int8 FROM_CAMERA = 10
