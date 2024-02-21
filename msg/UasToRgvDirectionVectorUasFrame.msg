@@ -19,5 +19,6 @@ int8 measurement_source
 # The direction vector
 float64[3] direction
 # The pose Unit Vectors in the UAS Frame
-float64[4] quaternions ####Stick with the scipy convention: Active rotation, Scalar last.
+## TODO Not sure this is necessary
+# float64[4] quaternions ####Stick with the scipy convention: Active rotation, Scalar last.
 ## TODO (TB) Check the quaternions reference for mavros
