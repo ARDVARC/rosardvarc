@@ -1,14 +1,15 @@
-## Constants
-# Possible values of the `rgv_id` field
-int8 RGV_1 = 1
-int8 RGV_2 = 2
-
 ## Fields
-# Time that this estimate is for
+# Time that these estimates are for
 time timestamp
-# ID of the measured RGV
-int8 rgv_id
-# Estimated position of the RGV
-float64[3] position
-# Estimated velocity of the RGV
-float64[3] velocity
+# Estimated position of RGV 1 in the local inertial frame
+float64[3] rgv1_position
+# Estimated velocity of RGV 1 in the local inertial frame
+float64[3] rgv1_velocity
+# Confidence associated with the RGV 1 estimation (0: low, 1: high)
+float64 rgv1_confidence
+# Estimated position of RGV 2 in the local inertial frame
+float64[3] rgv2_position
+# Estimated velocity of RGV 2 in the local inertial frame
+float64[3] rgv2_velocity
+# Confidence associated with the RGV 2 estimation (0: low, 1: high)
+float64 rgv2_confidence
