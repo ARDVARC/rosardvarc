@@ -35,5 +35,3 @@ git config --local core.hooksPath .githooks/
 
 ## Learn More
 For more details on the ARDVARC project, see [the core project repo](https://github.com/ARDVARC/ARDVARC).
-
-
