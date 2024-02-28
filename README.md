@@ -53,4 +53,17 @@ To kill a singular file use `kill -9 <SECOND COLUMN FROM LEFT>`. **Important Not
 
 To kill all python-related files use `killall -9 python3`. Note that this will kill anything with the name start 'python3'.
 
+**_Video Fake Generator Display_**
+
+To see the video actually loop, first run the fake data shell script:
+```
+cd path/to/ARDVARC/FSW
+./fake_generators_black_magic.sh
+```
+
+Then, in a different tab, run this ROS tool to see the published frames:
+```
+rosrun image_view image_view image:=/camera/frames
+```
+
 
