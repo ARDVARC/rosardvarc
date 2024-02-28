@@ -35,3 +35,22 @@ git config --local core.hooksPath .githooks/
 
 ## Learn More
 For more details on the ARDVARC project, see [the core project repo](https://github.com/ARDVARC/ARDVARC).
+
+## Running, Debugging, and rostools
+If issues occur always run `catkin_make` from the catkin ws first as an initial debug
+
+To display the rostopics, run `rostopic list` from the rosardvarc directory.
+
+A visual representation of the ROS node can be displayed by running `rqt_graph`.
+
+To listen to a topic manually, use `rostopic echo <TOPIC LOCATION>` to display all messages and `rostopic echo <TOPIC LOCATION> -n 1` to listen to the most recent.
+
+**_Rogue Scripts:_**
+
+When a python3 script does not automatically stop when using ctrl+c you can use `ps aux` to show all running scripts.
+
+To kill a singular file use `kill -9 <SECOND COLUMN FROM LEFT>`. **Important Note: Be careful what you kill, do not kill important things.**
+
+To kill all python-related files use `killall -9 python3`. Note that this will kill anything with the name start 'python3'.
+
+
