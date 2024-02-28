@@ -163,4 +163,3 @@ rosrun image_view image_view image:=/camera/frames
 ```
 rostopic echo /mavros/local_position/pose -n 1
 ```
-
