@@ -159,5 +159,8 @@ Then, in a different tab, run this ROS tool to see the published frames:
 ```
 rosrun image_view image_view image:=/camera/frames
 ```
-
+**_View Current Drone Position_**
+```
+rostopic echo /mavros/local_position/pose -n 1
+```
 
