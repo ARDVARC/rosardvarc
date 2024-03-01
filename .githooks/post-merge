@@ -1,0 +1,7 @@
+#!/bin/sh
+#
+# Modified from https://frankcorso.dev/automatically-run-build-scripts-switching-branches-git-hooks.html
+#
+
+cd "../.."
+catkin_make
