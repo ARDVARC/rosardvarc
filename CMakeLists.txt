@@ -58,6 +58,7 @@ add_message_files(
   UasToRgvDirectionVectorUasFrame.msg
   Setpoint.msg
   RegionOfInterest.msg
+  RgvLocalProjection.msg
 )
 
 ## Generate services in the 'srv' folder
