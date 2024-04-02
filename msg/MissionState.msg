@@ -40,11 +40,6 @@ uint8 LOCALIZE_RGV_2 = 5
 # field of view.
 uint8 JOINT_LOCALIZE = 6
 
-# In this state the flight software will be generating
-# setpoints to guide the drone outside of the mission area
-# back towards the home base.
-uint8 GO_HOME = 7
-
 ## Fields
 # The time that this mission state is for
 time timestamp
