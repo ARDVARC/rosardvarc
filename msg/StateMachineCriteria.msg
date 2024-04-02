@@ -46,7 +46,3 @@ bool rgv_2_sighted
 # state, where this TBD is less than the TBD in rgv_1_localized and
 # rgv_2_localized
 bool minimum_localize_time_reached
-
-# Battery is below TBD %, where TBD is a small value but enough to
-# definitely return to the home base
-bool battery_low
