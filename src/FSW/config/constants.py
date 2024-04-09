@@ -142,3 +142,13 @@ MAX_PLAUSIBLE_RGV_SPEED = 3 # m/s
 MISSION_AREA_HALF_WIDTH = 22.86 # m
 ESTIMATE_HISTORY_DURATION = 2 # s
 MAX_BLIND_FOLLOW_DURATION = 2 # s
+
+"""Bluetooth"""
+# John's code (drecated by Lyon)
+# # TODO: Make sure that this is correct
+# BLUETOOTH_DCM: npt.NDArray = np.array([[.2682,.8012,-.5350],[.3590,-.5985,-.7162],[-.8940,0,-.4481]])
+
+# New assumed rotation
+# Our assumption is that to align the bluetooth with the body frame,
+# we rotate the bluetooth soc by -90 degrees about the body frame y axis
+BLUETOOTH_2_BODY_ROT = Rotation.from_rotvec([0.0, np.pi/2, 0.0])
