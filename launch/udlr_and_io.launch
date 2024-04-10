@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <launch>
-    <include file="$(find rosardvarc)/launch/uldr_only.launch"/>
+    <include file="$(find rosardvarc)/launch/udlr_only.launch"/>
     <include file="$(find mavros)/launch/px4.launch">
         <arg name="fcu_url" value="udp://192.168.0.10:14560@192.168.0.3:14558"/>
     </include>
