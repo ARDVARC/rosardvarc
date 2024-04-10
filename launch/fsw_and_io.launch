@@ -10,5 +10,7 @@
     <param name="usb_cam/color_format" value="yuv422p"/>
     <param name="usb_cam/pixel_format" value="mjpeg"/>
     <node name="usb_cam_node" pkg="usb_cam" type="usb_cam_node.py" output="screen"/>
-    <include file="$(find mavros)/launch/px4.launch"/>
+    <include file="$(find mavros)/launch/px4.launch">
+        <arg name="fcu_url" value="udp://192.168.0.10:40000@192.168.0.3:14540"/>
+    </include>
 </launch>
