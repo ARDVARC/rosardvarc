@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<launch>
+    <node name="main" pkg="rosardvarc" type="main.py" output="screen"/>
+</launch>
