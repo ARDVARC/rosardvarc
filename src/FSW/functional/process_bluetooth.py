@@ -37,7 +37,6 @@ def _bluetooth_callback(msg: BluetoothAzimuthElevation):
 
     BluetoothToRgvDirectionVector = np.array([x,y,z])
     UASToRgvDirectionVector_bluetooth = BLUETOOTH_2_BODY_ROT.apply(BluetoothToRgvDirectionVector)
-    print(UASToRgvDirectionVector_bluetooth)
 
     # TODO: Reject readings with that give x, y, z values very different from 
     # And filter the the buffer
