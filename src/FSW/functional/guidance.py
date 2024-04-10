@@ -97,7 +97,7 @@ def _timer_callback(event=None):
         if offboard_status and offboard_start_time is None:
             offboard_start_time = rospy.Time.now()
         
-        x_set, y_set, z_set = _calc_orbit_setpoint_UpLeftRight(mission_state, RGV_state, current_UAS_pose, offboard_start_time, offboard_status)
+        x_set, y_set, z_set = _calc_orbit_setpoint_UpLeftRight(RGV_state, current_UAS_pose, offboard_start_time, offboard_status)
         current_setpoint = PoseStamped()
         # set the fields of 
         current_setpoint.pose.position.x = x_set
@@ -161,13 +161,10 @@ def _calc_orbit_setpoint_UpLeftRight(RGV: EstimatedRgvState, UAS: PoseStamped, s
     now = rospy.Time.now()
 
     if offboard_status:
-        if now > start_time + rospy.Duration(5) and now < start_time + rospy.Duration(10):
-            setpoint = [2,0,2]
-        elif now > start_time + rospy.Duration(10):
-            setpoint = [-2,0,2]
+        if now.to_sec() % 10 > 5:
+            setpoint = [2,0,10]
         else:
-            setpoint = CENTER_SETPOINT
-            rospy.logdebug("null setpoint returned")
+            setpoint = [-2,0,10]
     else:
         setpoint = CENTER_SETPOINT
 
