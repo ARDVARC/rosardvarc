@@ -29,13 +29,6 @@ from FSW.config.constants import *
 from mavros_msgs.msg import State
 from mavros_msgs.srv import CommandBool, CommandBoolRequest, SetMode, SetModeRequest
 
-# Clients for arming?
-rospy.wait_for_service(CLIENT_ARMING)
-arming_client = rospy.ServiceProxy(CLIENT_ARMING, CommandBool)
-
-rospy.wait_for_service(CLIENT_SET_MODE)
-set_mode_client = rospy.ServiceProxy(CLIENT_SET_MODE, SetMode)
-
 # current_RGV_state_lla = NavSatFix()
 
 # must be greater than 2 Hz however it ends up getting implemented
