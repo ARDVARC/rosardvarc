@@ -4,7 +4,7 @@ from FSW.config.topic_names import ESTIMATED_RGV_STATES, RGV_PROJECTIONS
 from FSW.config.constants import RGV_ID, MEAS_FROM_BLUETOOTH, MEAS_FROM_CAMERA, SPEED_THRESHOLD, \
     BLUETOOTH_WEIGHT, CAMERA_WEIGHT, MAX_PLAUSIBLE_RGV_SPEED, MISSION_AREA_HALF_WIDTH, \
     ORBITAL_RADIUS_SINGLE, ESTIMATE_HISTORY_DURATION, MAX_BLIND_FOLLOW_DURATION, \
-    IDEAL_TOTAL_WEIGHT
+    IDEAL_TOTAL_WEIGHT, MISSION_AREA_FALSE_NORTH
 from rosardvarc.msg import RgvLocalProjection, EstimatedRgvState
 from typing import Tuple
 import numpy as np
@@ -107,15 +107,23 @@ def _get_position_from_estimate(estimate: SingleRgvEstimate) -> Tuple[float, flo
     x_now = estimate.x_slope * now + estimate.x_intercept
     y_now = estimate.y_slope * now + estimate.y_intercept
     
+    # Convert to mission area frame
+    x_now_mission = x_now*np.cos(MISSION_AREA_FALSE_NORTH)-y_now*np.sin(MISSION_AREA_FALSE_NORTH)
+    y_now_mission = x_now*np.sin(MISSION_AREA_FALSE_NORTH)+y_now*np.cos(MISSION_AREA_FALSE_NORTH)
+    
     # Clamp estimate to within mission area
-    if x_now > MISSION_AREA_HALF_WIDTH - ORBITAL_RADIUS_SINGLE:
-        x_now = MISSION_AREA_HALF_WIDTH - ORBITAL_RADIUS_SINGLE
-    elif x_now < ORBITAL_RADIUS_SINGLE - MISSION_AREA_HALF_WIDTH:
-        x_now = ORBITAL_RADIUS_SINGLE - MISSION_AREA_HALF_WIDTH
-    if y_now > MISSION_AREA_HALF_WIDTH - ORBITAL_RADIUS_SINGLE:
-        y_now = MISSION_AREA_HALF_WIDTH - ORBITAL_RADIUS_SINGLE
-    elif y_now < ORBITAL_RADIUS_SINGLE - MISSION_AREA_HALF_WIDTH:
-        y_now = ORBITAL_RADIUS_SINGLE - MISSION_AREA_HALF_WIDTH
+    if x_now_mission > MISSION_AREA_HALF_WIDTH - ORBITAL_RADIUS_SINGLE:
+        x_now_mission = MISSION_AREA_HALF_WIDTH - ORBITAL_RADIUS_SINGLE
+    elif x_now_mission < ORBITAL_RADIUS_SINGLE - MISSION_AREA_HALF_WIDTH:
+        x_now_mission = ORBITAL_RADIUS_SINGLE - MISSION_AREA_HALF_WIDTH
+    if y_now_mission > MISSION_AREA_HALF_WIDTH - ORBITAL_RADIUS_SINGLE:
+        y_now_mission = MISSION_AREA_HALF_WIDTH - ORBITAL_RADIUS_SINGLE
+    elif y_now_mission < ORBITAL_RADIUS_SINGLE - MISSION_AREA_HALF_WIDTH:
+        y_now_mission = ORBITAL_RADIUS_SINGLE - MISSION_AREA_HALF_WIDTH
+    
+    # Convert back out of mission area frame
+    x_now = x_now_mission*np.cos(-MISSION_AREA_FALSE_NORTH)-y_now_mission*np.sin(-MISSION_AREA_FALSE_NORTH)
+    y_now = x_now_mission*np.sin(-MISSION_AREA_FALSE_NORTH)+y_now_mission*np.cos(-MISSION_AREA_FALSE_NORTH)
     
     return (x_now, y_now, 0)
 
