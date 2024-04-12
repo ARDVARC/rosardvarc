@@ -24,9 +24,11 @@ bluetooth_pub = rospy.Publisher(RAW_BLUETOOTH, BluetoothAzimuthElevation, queue_
 msg = BluetoothAzimuthElevation()
 
 # Call up serial port
+print("Trying to get serial port...")
 with serial.Serial("/dev/ttyUSB0", 115200) as s: # CHANGE TO COMXX PORT FOR WINDOWS, baud rate stays the same
-    try:
-        for line in read_lines(s): # run every time a new line is detected
+    print("Got serial port!")
+    for line in read_lines(s): # run every time a new line is detected
+        try:
             # Exit early if ROS is shutdown
             if rospy.is_shutdown():
                 quit()
@@ -49,6 +51,6 @@ with serial.Serial("/dev/ttyUSB0", 115200) as s: # CHANGE TO COMXX PORT FOR WIND
             
             # Send message
             bluetooth_pub.publish(msg)
-    except Exception as e:
-        rospy.logwarn("Bluetooth decoding issue:")
-        rospy.logwarn(e)
+        except (ValueError, IndexError, rospy.exceptions.ROSSerializationException) as e:
+            rospy.logwarn("Bluetooth decoding issue:")
+            rospy.logwarn(e)
