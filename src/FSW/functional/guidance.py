@@ -154,10 +154,14 @@ def _calc_orbit_setpoint_UpLeftRight(RGV: EstimatedRgvState, UAS: PoseStamped, s
     now = rospy.Time.now()
 
     if offboard_status:
-        if now.to_sec() % 10 > 5:
+        if now.to_sec() % 20 > 5:
             setpoint = [2,0,10]
-        else:
+        if now.to_sec() % 20 > 10:
+            setpoint = [0,2,10]
+        if now.to_sec() % 20 > 15:
             setpoint = [-2,0,10]
+        else:
+            setpoint = [0,-2,10]
     else:
         setpoint = CENTER_SETPOINT
 
