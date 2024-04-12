@@ -10,9 +10,6 @@ ESTIMATED_RGV_STATES = "estimation/estimated_rgv_states"
 MISSION_STATES = "state_machine/mission_states"
 FORCED_MISSION_STATE = "state_machine/forced"
 STATE_MACHINE_CRITERIA = "state_machine/state_machine_criteria"
-#TODO(LF): what is the SETPOINTS for?
-SETPOINTS = "pixhawk/setpoints"
-REGIONS_OF_INTEREST = "pixhawk/regions_of_interest"
 
 UAS_ARMING_STATE = "mavros/state"
 UAS_SETPOINT_LOCAL = "mavros/setpoint_position/local"
