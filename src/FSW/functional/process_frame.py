@@ -33,21 +33,21 @@ from FSW.config import constants
 # from config import constants
 import rospy #Comment out for windows unit test
 from rosardvarc.msg import UasToRgvDirectionVectorUasFrame ##Comment out for windows unit test
-from typing import Optional, List
+from typing import Optional, List, Any
 ## TODO Make sure all imports are correct
 
 
 @dataclass
 class DetectionInfo():
     ##TODO Combine the IDS and Dir Vecs into a list of tuples
-    annotated_camera_frame: cv2.typing.MatLike
+    annotated_camera_frame: Any
     rgv_ids: List[constants.RGV_ID]
     direction_vectors: List[np.ndarray]
     
 
 
 ## Function to detect ArUco markers
-def detect_ArUco_Direction_and_Pose(frame: cv2.typing.MatLike) -> DetectionInfo: 
+def detect_ArUco_Direction_and_Pose(frame) -> DetectionInfo: 
     direction_vectors: List[np.ndarray] = []
     ids_list: List[constants.RGV_ID] = []
     frame_copy = frame.copy()
