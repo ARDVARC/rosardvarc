@@ -1,6 +1,6 @@
 ## --- Topic Names ---
 ANNOTATED_CAMERA_FRAMES = "camera/annotated_frames"
-CAMERA_FRAMES = "camera/frames"
+CAMERA_FRAMES = "usb_cam/image_raw"
 UAS_POSES = "mavros/local_position/pose"
 RECENT_RGV_SIGHTINGS = "camera/recent_rgv_sightings"
 RAW_BLUETOOTH = "bluetooth/az_els"
