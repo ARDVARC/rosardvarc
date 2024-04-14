@@ -62,7 +62,7 @@ def frame_callback(msg: Image):
 
     ##Annotated Frame Message Definition
     # TODO: Make this something reasonable based on detection_info.annotated_camera_frame (TB 2021-04-07: I think that this is right but im not sure that this is the correct way to do this)
-    annotated_frame = bridge.cv2_to_imgmsg(detection_info.annotated_camera_frame, encoding="bgr8")
+    annotated_frame = bridge.cv2_to_imgmsg(detection_info.annotated_camera_frame, encoding="rgb8")
     pub_frame.publish(annotated_frame)
     rospy.logdebug("CV published an annotated frame")
 
