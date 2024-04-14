@@ -4,6 +4,7 @@ from typing import Generator
 from FSW.config.topic_names import RAW_BLUETOOTH
 from FSW.config.constants import RGV_ID
 from rosardvarc.msg import BluetoothAzimuthElevation
+import sys
 
 # SERIAL PORT READ LINE FUNCTION
 def read_lines(s: serial.Serial, sep: bytes = b"\r\n\r\n") -> Generator[bytes, None, None]: #/r/n/r/n: carriage return, readline, carriage return, readline (what the array outputs to denote new line)
@@ -51,6 +52,8 @@ with serial.Serial("/dev/ttyUSB0", 115200) as s: # CHANGE TO COMXX PORT FOR WIND
             
             # Send message
             bluetooth_pub.publish(msg)
-        except (ValueError, IndexError, rospy.exceptions.ROSSerializationException) as e:
+        except UserAbort, KeyboardInterrupt as e:
+            raise e
+        except Exception as e:
             rospy.logwarn("Bluetooth decoding issue:")
             rospy.logwarn(e)

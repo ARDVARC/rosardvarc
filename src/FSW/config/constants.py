@@ -128,8 +128,8 @@ AERO_BACKYARD_APPROX_ALT = 1614.001932 # meters
 # TODO(LF) review before flight because this will be the first setpoint sent and will also be
 # sent in null-type cases
 # this specifically is the point in local frame where the pilot is planning on having the drone in hold mode when the pilot switches to offboard mode
-CENTER_SETPOINT = [0,0,0]
-HOME_SETPOINT = [-10,-10,0]
+CENTER_SETPOINT = [0,0,5]
+HOME_SETPOINT = [-10,-10,5]
 
 """Estimator"""
 SPEED_THRESHOLD = 0.3 # m/s
