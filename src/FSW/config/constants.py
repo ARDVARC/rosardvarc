@@ -34,7 +34,7 @@ MEAS_FROM_BLUETOOTH: int = 11
 """Pi Camera Parameters"""
 ## TODO Could be determined from the camera calibration function from cv2.aruco
 ## TODO This Needs to be updated to the true camera intrinsic parameters
-INTRINSICS_PI_CAMERA: npt.NDArray = np.array([[916.6706684, 0, 720], [0, 916.6706684, 540], [0, 0, 1]])
+INTRINSICS_PI_CAMERA: npt.NDArray = np.array([[914.0147243, 0, 640], [0, 914.0147243, 400], [0, 0, 1]])
 ## TODO This Needs to be updated to the true camera distortion parameters
 ## TODO Could be determined from the camera calibration function from cv2.aruco
 DISTORTION: npt.NDArray = np.array([0.0, 0.0, 0.0, 0.0])
