@@ -74,6 +74,6 @@ def setup():
     """
 
     global _projected_rgv_state_pub, _uas_state_sub, _direction_vector_sub
-    _projected_rgv_state_pub = rospy.Publisher(RGV_PROJECTIONS, RgvLocalProjection, queue_size=1)
+    _projected_rgv_state_pub = rospy.Publisher(RGV_PROJECTIONS, RgvLocalProjection, queue_size=64)
     _uas_state_sub = rospy.Subscriber(UAS_POSES, PoseStamped, _uas_state_callback)
     _direction_vector_sub = rospy.Subscriber(UAS_TO_RGV_DIRECTION_VECTORS, UasToRgvDirectionVectorUasFrame, _direction_vector_callback)

@@ -82,7 +82,7 @@ def setup():
     """
 
     global _estimated_rgv_state_pub, _rgv_projection_sub
-    _estimated_rgv_state_pub = rospy.Publisher(ESTIMATED_RGV_STATES, EstimatedRgvState, queue_size=1)
+    _estimated_rgv_state_pub = rospy.Publisher(ESTIMATED_RGV_STATES, EstimatedRgvState, queue_size=64)
     _rgv_projection_sub = rospy.Subscriber(RGV_PROJECTIONS, RgvLocalProjection, _rgv_projection_callback)
 
 

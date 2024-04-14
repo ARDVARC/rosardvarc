@@ -173,9 +173,9 @@ def setup():
     """
     
     global _mission_state_pub, _state_machine_criteria_sub, _forced_pub, _force_state_service
-    _mission_state_pub = rospy.Publisher(MISSION_STATES, MissionState, queue_size=1)
+    _mission_state_pub = rospy.Publisher(MISSION_STATES, MissionState, queue_size=64)
     _state_machine_criteria_sub = rospy.Subscriber(STATE_MACHINE_CRITERIA, StateMachineCriteria, _state_machine_criteria_callback)
-    _forced_pub = rospy.Publisher(FORCED_MISSION_STATE, Bool, queue_size=1)
+    _forced_pub = rospy.Publisher(FORCED_MISSION_STATE, Bool, queue_size=64)
     _force_state_service = rospy.Service(FORCE_MISSION_STATE_SERVICE, ForceMissionState, _force_state_service_handler)
     
 

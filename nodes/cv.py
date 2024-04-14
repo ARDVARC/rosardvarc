@@ -95,11 +95,11 @@ def frame_callback(msg: Image):
 ## Initialize the necessary nodes and the publishers.
 rospy.init_node("cv_node")
 bridge = CvBridge()
-pub_frame = rospy.Publisher(ANNOTATED_CAMERA_FRAMES, Image, queue_size=1)
+pub_frame = rospy.Publisher(ANNOTATED_CAMERA_FRAMES, Image, queue_size=64)
 ## TODO Implement the publisher for the recent sightings.
-pub_sightings = rospy.Publisher(RECENT_RGV_SIGHTINGS, RecentSighting, queue_size=1)
+pub_sightings = rospy.Publisher(RECENT_RGV_SIGHTINGS, RecentSighting, queue_size=64)
 ## TODO Implement the publisher for the pointing vector.
-pub_vector = rospy.Publisher(UAS_TO_RGV_DIRECTION_VECTORS, UasToRgvDirectionVectorUasFrame, queue_size=1)
+pub_vector = rospy.Publisher(UAS_TO_RGV_DIRECTION_VECTORS, UasToRgvDirectionVectorUasFrame, queue_size=64)
 ## TODO Implement the subscriber for the camera frame.
 sub_frame = rospy.Subscriber(CAMERA_FRAMES, Image, frame_callback)
 
