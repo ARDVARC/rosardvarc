@@ -40,8 +40,8 @@ INTRINSICS_PI_CAMERA: npt.NDArray = np.array([[914.0147243, 0, 640], [0, 914.014
 DISTORTION: npt.NDArray = np.array([0.0, 0.0, 0.0, 0.0])
 ## TODO Update the formatting of the camera extrinsic parameters
 ## TODO Configure a way to get the camera extrinsic parameters accurately
-EXTRINSICS_PI_CAMERA_DCM: npt.NDArray = Rotation.from_euler("ZY", (90, 180), degrees=True).as_matrix() #DCM From UAS 2 Camera
-EXTRINSICS_PI_CAMERA_TVEC: npt.NDArray = np.array([[0.2], [0.0], [0.0]]) #tvec for Camera from UAS in UAS Frame
+EXTRINSICS_PI_CAMERA_DCM: npt.NDArray = Rotation.from_euler("ZYZ", (90, 180, 180), degrees=True).as_matrix() #DCM From UAS 2 Camera
+EXTRINSICS_PI_CAMERA_TVEC: npt.NDArray = np.array([[0.2], [0.0], [-0.0889]]) #tvec for Camera from UAS in UAS Frame
 ## TODO Verify the units on this, I think it needs to match the calibration units (mm)
 MARKER_SIZE: float = .352 # meters (15 inches)
 
