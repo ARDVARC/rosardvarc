@@ -18,7 +18,7 @@ def read_lines(s: serial.Serial, sep: bytes = b"\r\n\r\n") -> Generator[bytes, N
 rospy.init_node("read_raw_bluetooth")
 
 # Create publisher for raw bluetooth
-bluetooth_pub = rospy.Publisher(RAW_BLUETOOTH, BluetoothAzimuthElevation, queue_size=1)
+bluetooth_pub = rospy.Publisher(RAW_BLUETOOTH, BluetoothAzimuthElevation, queue_size=64)
 
 # Create message that will be updated and sent each time a new raw measurement is received
 msg = BluetoothAzimuthElevation()
