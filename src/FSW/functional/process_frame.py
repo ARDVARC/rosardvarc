@@ -54,12 +54,10 @@ def detect_ArUco_Direction_and_Pose(frame) -> DetectionInfo:
 
     for aruco_type, dictionary_id in constants.ARUCO_DICT.items():
 
-        parameters =  cv2.aruco.DetectorParameters()
         dictionary = cv2.aruco.getPredefinedDictionary(dictionary_id)
-        detector = cv2.aruco.ArucoDetector(dictionary, parameters)  
         
         ## Get the ArUco directory
-        (corners, ids, _) = detector.detectMarkers(frame)
+        (corners, ids, _) = cv2.aruco.detectMarkers(frame, dictionary)
 
         # verify *at least* one ArUco marker was detected
         if len(corners) > 0:
