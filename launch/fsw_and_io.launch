@@ -5,12 +5,12 @@
     <param name="usb_cam/video_device" value="/dev/video0"/>
     <param name="usb_cam/image_width" value="1280"/>
     <param name="usb_cam/image_height" value="800"/>
-    <param name="usb_cam/framerate" value="60"/>
+    <param name="usb_cam/framerate" value="5"/>
     <param name="usb_cam/io_method" value="mmap"/>
     <param name="usb_cam/color_format" value="yuv422p"/>
     <param name="usb_cam/pixel_format" value="mjpeg"/>
-    <node name="usb_cam_node" pkg="usb_cam" type="usb_cam_node.py" output="screen"/>
+    <node name="usb_cam" pkg="usb_cam" type="usb_cam_node" output="screen"/>
     <include file="$(find mavros)/launch/px4.launch">
-        <arg name="fcu_url" value="udp://192.168.0.10:40000@192.168.0.3:14540"/>
+        <arg name="fcu_url" value="udp://192.168.0.10:14560@192.168.0.3:14558"/>
     </include>
 </launch>
