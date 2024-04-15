@@ -172,6 +172,7 @@ catkin_install_python(PROGRAMS
   nodes/cv.py
   nodes/main.py
   nodes/read_raw_bluetooth_from_array.py
+  nodes/camera_rate_reducer.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
