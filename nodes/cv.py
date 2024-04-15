@@ -42,9 +42,48 @@ import numpy as np
 import os
 import argparse
 from cv_bridge import CvBridge
+import subprocess
 ## TODO Make sure all imports are correct
 ## TODO Create the callback for the camera frame subscriber.
 ## TODO Call the write to flash function within this callback
+
+
+
+class VideoEncoderNode:
+    def __init__(self):
+        self.bridge = CvBridge()
+        self.image_sub = rospy.Subscriber(CAMERA_FRAMES, Image, self.image_callback)
+        self.video_pub = rospy.Publisher('/encoded_video', Image, queue_size=10)
+
+    def image_callback(self, msg):
+        cv_image = self.bridge.imgmsg_to_cv2(msg, desired_encoding='bgr8')
+        
+        # Encode the video frame using ffmpeg
+        cmd = ['ffmpeg', '-f', 'rawvideo', '-vcodec', 'rawvideo', '-s', '1280x800', '-pix_fmt', 'rgb8', '-i', '-', '-vcodec', 'libx264', '-preset', 'ultrafast', '-tune', 'zerolatency', '-f', 'h264', '-']
+        #cmd = ['ffmpeg', '-f', 'rawvideo', '-vcodec', 'rawvideo', '-s', '1280x800', '-pix_fmt', 'rgb8', '-i', '-', '-vcodec', 'h264_v4l2m2m', '-preset', 'ultrafast', '-tune', 'zerolatency', '-f', 'h264', '-']
+        proc = subprocess.Popen(cmd, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+
+        # Write each frame to the stdin of ffmpeg
+        encoded_frame, error = proc.communicate(input=cv_image.tobytes())
+        if error:
+            print(error)
+
+        # # Read the encoded frames from ffmpeg's stdout and publish them as ROS image messages
+        # encoded_frame = b''
+        # while True:
+        #     chunk = proc.stdout.read(4096)  # Adjust buffer size as needed
+        #     if not chunk:
+        #         break
+        #     encoded_frame += chunk
+
+        image_msg = Image()
+        image_msg.data = encoded_frame
+        self.video_pub.publish(image_msg)
+
+        proc.wait()
+
+
+
 
 
 ## TODO (02/26 - TB) Finish the cv.py message publishing 
@@ -102,6 +141,8 @@ pub_sightings = rospy.Publisher(RECENT_RGV_SIGHTINGS, RecentSighting, queue_size
 pub_vector = rospy.Publisher(UAS_TO_RGV_DIRECTION_VECTORS, UasToRgvDirectionVectorUasFrame, queue_size=64)
 ## TODO Implement the subscriber for the camera frame.
 sub_frame = rospy.Subscriber(CAMERA_FRAMES, Image, frame_callback)
+
+video_encoder = VideoEncoderNode()
 
 
 ## Spin until killed
