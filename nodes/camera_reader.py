@@ -9,6 +9,7 @@ frame_pub = rospy.Publisher(CAMERA_FRAMES, Image, queue_size=64)
 
 bridge = CvBridge()
 cap = cv2.VideoCapture(0)
+
 if not cap.isOpened():
     print(":'(")
     exit()
@@ -19,6 +20,7 @@ while not rospy.is_shutdown():
     if not ret:
         print("No frame?")
     
-    msg = bridge.cv2_to_imgmsg(frame)
+    msg = bridge.cv2_to_imgmsg(frame, encoding="bgr8")
     
     frame_pub.publish(msg)
+    rospy.loginfo("Published frame")
