@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<launch>
+    <node name="main" pkg="rosardvarc" type="main.py" output="screen"/>
+    <!--
+    <node name="cv" pkg="rosardvarc" type="cv.py" output="screen"/>
+    -->
+</launch>

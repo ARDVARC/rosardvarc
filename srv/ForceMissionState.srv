@@ -1,0 +1,5 @@
+bool force
+uint8 mission_state
+---
+bool success
+string message

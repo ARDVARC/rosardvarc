@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<launch>
+    <include file="$(find rosardvarc)/launch/fsw_only.launch"/>
+    <node name="read_raw_bluetooth_from_array" pkg="rosardvarc" type="read_raw_bluetooth_from_array.py" output="screen"/>
+    <param name="usb_cam/video_device" value="/dev/video0"/>
+    <param name="usb_cam/image_width" value="1280"/>
+    <param name="usb_cam/image_height" value="800"/>
+    <param name="usb_cam/framerate" value="60"/>
+    <param name="usb_cam/io_method" value="mmap"/>
+    <param name="usb_cam/color_format" value="yuv422p"/>
+    <param name="usb_cam/pixel_format" value="mjpeg"/>
+    <node name="usb_cam_node" pkg="usb_cam" type="usb_cam_node.py" output="screen"/>
+    <include file="$(find mavros)/launch/px4.launch">
+        <arg name="fcu_url" value="udp://192.168.0.10:40000@192.168.0.3:14540"/>
+    </include>
+</launch>
