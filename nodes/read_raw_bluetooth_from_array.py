@@ -45,7 +45,8 @@ with serial.Serial("/dev/ttyUSB0", 115200) as s: # CHANGE TO COMXX PORT FOR WIND
             ang2 = int(splitted[3]) # Parse angle 2
             
             # Fill out message
-            msg.timestamp = rospy.Time.now()
+            offset = 0.3
+            msg.timestamp = rospy.Time.now() - rospy.Time.from_sec(offset)
             msg.rgv_id = b_id
             msg.azimuth = ang1
             msg.elevation = ang2
