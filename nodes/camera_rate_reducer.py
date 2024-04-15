@@ -16,3 +16,5 @@ def frame_callback(msg: Image):
 rospy.init_node("camera_rate_reducer")
 slow_frame_pub = rospy.Publisher(BAGGED_FRAMES, Image, queue_size=64)
 fast_frame_sub = rospy.Subscriber(CAMERA_FRAMES, Image, frame_callback)
+
+rospy.spin()
