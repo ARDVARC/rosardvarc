@@ -15,6 +15,7 @@ from FSW.util.sorted_buffer import SortedBuffer
 class SingleRgvEstimate:
     confidence: float
     moving: bool
+    speed: float
     x_slope: float
     x_intercept: float
     y_slope: float
@@ -33,8 +34,8 @@ _rgv_2_camera_projection_buffer = SortedBuffer(_projection_key_func)
 _rgv_2_bluetooth_projection_buffer = SortedBuffer(_projection_key_func)
 _new_rgv_2_projection = False
 
-_rgv_1_estimate = SingleRgvEstimate(0, True, 0, 0, 0, 0, rospy.Time.now())
-_rgv_2_estimate = SingleRgvEstimate(0, True, 0, 0, 0, 0, rospy.Time.now())
+_rgv_1_estimate = SingleRgvEstimate(0, True, 1, 0, 0, 0, 0, rospy.Time.now())
+_rgv_2_estimate = SingleRgvEstimate(0, True, 1, 0, 0, 0, 0, rospy.Time.now())
 
 _estimated_rgv_state_pub: rospy.Publisher
 _rgv_projection_sub: rospy.Subscriber
@@ -47,10 +48,12 @@ def _build_estimate_msg(rgv1_estimate: SingleRgvEstimate, rgv2_estimate: SingleR
     
     msg.rgv1_confidence = rgv1_estimate.confidence
     msg.rgv1_moving = rgv1_estimate.moving
+    msg.rgv1_speed = rgv1_estimate.speed
     msg.rgv1_position_local = _get_position_from_estimate(rgv1_estimate)
     
     msg.rgv2_confidence = rgv2_estimate.confidence
     msg.rgv2_moving = rgv2_estimate.moving
+    msg.rgv2_speed = rgv2_estimate.speed
     msg.rgv2_position_local = _get_position_from_estimate(rgv2_estimate)
     
     return msg
@@ -168,6 +171,7 @@ def _update_estimate(rgv_estimate: SingleRgvEstimate,
     # If there's no new data then just use the old estimate with the new confidence
     if not new_rgv_projection:
         rgv_estimate.moving = True
+        rgv_estimate.speed = 1
         return
         
     bluetooth_times = [proj.timestamp.to_sec() for proj in bluetooth_buffer]
@@ -188,6 +192,7 @@ def _update_estimate(rgv_estimate: SingleRgvEstimate,
         rgv_estimate.x_slope = 0
         rgv_estimate.y_slope = 0
         rgv_estimate.moving = True
+        rgv_estimate.speed = 1
         rgv_estimate.timestamp = rospy.Time.now()
         return
     
@@ -199,6 +204,7 @@ def _update_estimate(rgv_estimate: SingleRgvEstimate,
     speed = np.sqrt(rgv_estimate.x_slope**2+rgv_estimate.y_slope**2)
     
     rgv_estimate.moving = speed > SPEED_THRESHOLD
+    rgv_estimate.speed = speed
     
     if speed > MAX_PLAUSIBLE_RGV_SPEED:
         # This is clearly a bad estimate, let's just average instead

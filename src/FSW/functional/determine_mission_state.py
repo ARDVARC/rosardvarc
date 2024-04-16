@@ -98,7 +98,7 @@ def _determine_next_mission_state(current_state: MissionStates, criteria: StateM
         if not criteria.recent_rgv_1_estimate:
             # Change to FIND_RGV_1
             return MissionStates.FIND_RGV_1
-        elif criteria.rgv_1_is_moving or not criteria.rgv_1_sighted:
+        elif criteria.rgv_1_is_moving:
             # Stay in TRACK_RGV_1
             return MissionStates.TRACK_RGV_1
         else:
@@ -118,7 +118,7 @@ def _determine_next_mission_state(current_state: MissionStates, criteria: StateM
                 return MissionStates.FIND_RGV_2
         else:
             # Stay on RGV 1
-            if (criteria.rgv_1_is_moving and not criteria.minimum_localize_time_reached) or not criteria.rgv_1_sighted:
+            if (criteria.rgv_1_is_moving and not criteria.minimum_localize_time_reached):
                 # Change to TRACK_RGV_1
                 return MissionStates.TRACK_RGV_1
             else:
@@ -135,7 +135,7 @@ def _determine_next_mission_state(current_state: MissionStates, criteria: StateM
         if not criteria.recent_rgv_2_estimate:
             # Change to FIND_RGV_2
             return MissionStates.FIND_RGV_2
-        elif criteria.rgv_2_is_moving or not criteria.rgv_2_sighted:
+        elif criteria.rgv_2_is_moving:
             # Stay in TRACK_RGV_2
             return MissionStates.TRACK_RGV_2
         else:
@@ -150,7 +150,7 @@ def _determine_next_mission_state(current_state: MissionStates, criteria: StateM
             return MissionStates.JOINT_LOCALIZE
         else:
             # Stay on RGV 2
-            if (criteria.rgv_2_is_moving and not criteria.minimum_localize_time_reached) or not criteria.rgv_2_sighted:
+            if (criteria.rgv_2_is_moving and not criteria.minimum_localize_time_reached):
                 # Change to TRACK_RGV_2
                 return MissionStates.TRACK_RGV_2
             else:

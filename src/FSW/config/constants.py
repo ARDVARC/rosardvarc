@@ -48,6 +48,7 @@ MARKER_SIZE: float = .352 # meters (15 inches)
 
 """RGV"""
 class RGV_ID(IntEnum):
+    NONE = 0
     RGV1 = 1
     RGV2 = 2
     RGVBOTH = 3
@@ -99,6 +100,7 @@ JOINT_DURATION: rospy.Duration = rospy.Duration.from_sec(240)
 RECENT_SIGHTING_TIME_CUTOFF: rospy.Duration = rospy.Duration.from_sec(2)
 MINIMUM_LOCALIZE_DURATION: rospy.Duration = rospy.Duration.from_sec(60)
 CONFIDENT_ESTIMATE_THRESHOLD: float = 0.2
+RECENTLY_STOPPED_CUTOFF: rospy.Duration = rospy.Duration.from_sec(5)
 
 """Guidance"""
 # TODO(LF) review this
@@ -134,14 +136,14 @@ HOME_SETPOINT = [-10,-10,0]
 """Estimator"""
 SPEED_THRESHOLD = 0.3 # m/s
 
-BLUETOOTH_WEIGHT = 1
+BLUETOOTH_WEIGHT = 10
 CAMERA_WEIGHT = 100
 IDEAL_TOTAL_WEIGHT = 200
 
 MAX_PLAUSIBLE_RGV_SPEED = 3 # m/s
 MISSION_AREA_HALF_WIDTH = 16.5 # m
 MISSION_AREA_FALSE_NORTH = np.deg2rad(20) # rad CW from north
-ESTIMATE_HISTORY_DURATION = 2 # s
+ESTIMATE_HISTORY_DURATION = 6 # s
 MAX_BLIND_FOLLOW_DURATION = 2 # s
 
 """Bluetooth"""

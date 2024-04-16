@@ -39,7 +39,7 @@ process_bluetooth.setup()
 projector.setup()
 
 # Run the estimation loop until we die
-rate = rospy.Rate(10)
+rate = rospy.Rate(2)
 now = rospy.Time.now()
 while not rospy.is_shutdown():
     estimate_rgv_state.publish_estimated_rgv_state()
