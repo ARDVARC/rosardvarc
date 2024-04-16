@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<launch>
+    <param name="usb_cam/video_device" value="/dev/video0"/>
+    <param name="usb_cam/image_width" value="1280"/>
+    <param name="usb_cam/image_height" value="800"/>
+    <param name="usb_cam/framerate" value="100"/>
+    <param name="usb_cam/io_method" value="mmap"/>
+    <param name="usb_cam/color_format" value="yuv422p"/>
+    <param name="usb_cam/pixel_format" value="mjpeg"/>
+    <param name="usb_cam/image_raw/compressed/jpeg_optimize" value="true"/>
+    <param name="usb_cam/image_raw/compressed/jpeg_quality" value="100"/>
+    <node name="usb_cam" pkg="usb_cam" type="usb_cam_node" output="screen" respawn="true"/>
+</launch>

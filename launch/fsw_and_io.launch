@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<launch>
+    <include file="$(find rosardvarc)/launch/fsw_only.launch"/>
+    <include file="$(find rosardvarc)/launch/camera_only.launch"/>
+    <node name="read_raw_bluetooth_from_array" pkg="rosardvarc" type="read_raw_bluetooth_from_array.py" output="screen" respawn="true"/>
+    <include file="$(find mavros)/launch/px4.launch">
+        <arg name="fcu_url" value="udp://192.168.0.10:14560@192.168.0.3:14558"/>
+    </include>
+</launch>
