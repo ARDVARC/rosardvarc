@@ -58,7 +58,7 @@ def _bluetooth_callback(msg: BluetoothAzimuthElevation):
     
     pub_msg = UasToRgvDirectionVectorUasFrame()
     
-    pub_msg.timestamp = msg.timestamp - rospy.Time.from_sec(0.8)
+    pub_msg.timestamp = msg.timestamp
     pub_msg.rgv_id = msg.rgv_id
     pub_msg.measurement_source = MEAS_FROM_BLUETOOTH
     pub_msg.direction = UASToRgvDirectionVector_bluetooth
