@@ -63,8 +63,8 @@ def _build_state_machine_criteria_message(now: rospy.Time) -> StateMachineCriter
     state_machine_criteria.timestamp = now
     state_machine_criteria.recent_rgv_1_estimate = _time_of_most_recent_confident_rgv_1_estimate is not None and now - _time_of_most_recent_confident_rgv_1_estimate <= RECENT_ESTIMATE_TIME_CUTOFF
     state_machine_criteria.recent_rgv_2_estimate = _time_of_most_recent_confident_rgv_2_estimate is not None and now - _time_of_most_recent_confident_rgv_2_estimate <= RECENT_ESTIMATE_TIME_CUTOFF
-    state_machine_criteria.rgv_1_is_moving = _time_of_most_recent_rgv_1_still is not None and now - _time_of_most_recent_rgv_1_still <= RECENTLY_STOPPED_CUTOFF
-    state_machine_criteria.rgv_2_is_moving = _time_of_most_recent_rgv_2_still is not None and now - _time_of_most_recent_rgv_2_still <= RECENTLY_STOPPED_CUTOFF
+    state_machine_criteria.rgv_1_is_moving = _time_of_most_recent_rgv_1_still is None or now - _time_of_most_recent_rgv_1_still >= RECENTLY_STOPPED_CUTOFF
+    state_machine_criteria.rgv_2_is_moving = _time_of_most_recent_rgv_2_still is None or now - _time_of_most_recent_rgv_2_still >= RECENTLY_STOPPED_CUTOFF
     state_machine_criteria.rgv_1_localized = _current_mission_state is MissionStates.LOCALIZE_RGV_1 and current_mission_state_time_spent >= LOCALIZE_DURATION
     state_machine_criteria.rgv_2_localized = _current_mission_state is MissionStates.LOCALIZE_RGV_2 and current_mission_state_time_spent >= LOCALIZE_DURATION
     state_machine_criteria.joint_localized = _current_mission_state is MissionStates.JOINT_LOCALIZE and current_mission_state_time_spent >= JOINT_DURATION
