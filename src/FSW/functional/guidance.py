@@ -52,21 +52,25 @@ def _UAS_arming_state_callback(msg: State):
     global current_UAS_arming_state
     current_UAS_arming_state = msg
 
+
 def _estimated_rgv_state_callback(msg: EstimatedRgvState):
     rospy.logdebug("Guidance saved an estimated RGV state")
     rospy.logdebug(msg)
     global RGV_state
     RGV_state = msg
 
+
 def _mission_state_callback(msg: MissionState):
     global mission_state
     mission_state = msg
+
     
 def _uas_pose_callback(msg: PoseStamped):
     rospy.logdebug("Guidance saved a UAS pose")
 
     global current_UAS_pose
     current_UAS_pose = msg
+
 
 def _create_setpoint_timer_callback(event=None):
     global toBeWritten_setpoint
@@ -103,6 +107,7 @@ def _create_setpoint_timer_callback(event=None):
     toBeWritten_setpoint.pose.position.y = y_set
     toBeWritten_setpoint.pose.position.z = z_set
 
+
 def _publish_setpoint_timer_callback(event=None):
     if(rospy.is_shutdown()): # then leave bro
         return
@@ -110,52 +115,6 @@ def _publish_setpoint_timer_callback(event=None):
         _setpoint_pub.publish(toBeWritten_setpoint)
         rospy.logdebug(f"Guidance published an orbit setpoint: {toBeWritten_setpoint}")
 
-
-# def _timer_callback(event=None):
-#     global offboard_start_time
-#     if(rospy.is_shutdown()): # then leave bro
-#         return
-#     else:
-#         # bool for if we're offboard or not
-#         offboard_status = (current_UAS_arming_state.mode == "OFFBOARD")
-#         if offboard_status and offboard_start_time is None:
-#             offboard_start_time = rospy.Time.now()
-        
-#         case = mission_state.mission_state
-#         if case == mission_state.FIND_RGV_1:
-#             x_set, y_set, z_set = _calc_orbit_setpoint_find(mission_state, RGV_state, current_UAS_pose, offboard_start_time, offboard_status)
-        
-#         elif case == mission_state.FIND_RGV_2:
-#             x_set, y_set, z_set = _calc_orbit_setpoint_find(mission_state, RGV_state, current_UAS_pose, offboard_start_time, offboard_status)
-
-#         elif case == mission_state.TRACK_RGV_1: 
-#             x_set, y_set, z_set = _calc_orbit_setpoint_track(mission_state, RGV_state, current_UAS_pose, offboard_start_time, offboard_status)
-
-#         elif case == mission_state.TRACK_RGV_2:
-#             x_set, y_set, z_set = _calc_orbit_setpoint_track(mission_state, RGV_state, current_UAS_pose, offboard_start_time, offboard_status)
-
-#         elif case == mission_state.LOCALIZE_RGV_1:
-#             x_set, y_set, z_set = _calc_orbit_setpoint_localize(mission_state, RGV_state, current_UAS_pose, offboard_start_time, offboard_status)
-
-#         elif case == mission_state.LOCALIZE_RGV_2:
-#             x_set, y_set, z_set = _calc_orbit_setpoint_localize(mission_state, RGV_state, current_UAS_pose, offboard_start_time, offboard_status)
-        
-#         elif case == mission_state.JOINT_LOCALIZE:
-#             x_set, y_set, z_set = _calc_orbit_setpoint_joint(mission_state, RGV_state, current_UAS_pose, offboard_start_time, offboard_status)
-
-#         else:
-#             rospy.logdebug("null setpoint returned")
-#             x_set, y_set, z_set = CENTER_SETPOINT
-
-#         current_setpoint = PoseStamped()
-#         # set the fields of 
-#         current_setpoint.pose.position.x = x_set
-#         current_setpoint.pose.position.y = y_set
-#         current_setpoint.pose.position.z = z_set
-
-   
-#         _setpoint_pub.publish(current_setpoint)
-#         rospy.logdebug(f"Guidance published an orbit setpoint: {current_setpoint}")
 
 def setup():
     """
