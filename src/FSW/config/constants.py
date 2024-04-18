@@ -155,3 +155,7 @@ MAX_BLIND_FOLLOW_DURATION = 2 # s
 # Our assumption is that to align the bluetooth with the body frame,
 # we rotate the bluetooth soc by -90 degrees about the body frame y axis
 BLUETOOTH_2_BODY_ROT = Rotation.from_rotvec([0.0, np.pi/2, 0.0])
+
+# How much time to remove from reported bluetooth received times to get true bluetooth
+# received times
+BLUETOOTH_OFFSET: rospy.Duration = rospy.Duration.from_sec(0.7)
