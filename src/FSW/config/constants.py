@@ -114,7 +114,7 @@ ORBITAL_PERIOD = 20  # seconds to complete a full orbit
 TIME_AT_ORBIT_POINT = 5  # [seconds] loiter at each point in the orbit for 5 seconds
 
 # TODO(LF) review this
-UAS_ALTITUDE_SETPOINT_JOINT = 18.0 # meters (Little under 60 ft)
+UAS_ALTITUDE_SETPOINT_JOINT = 9.2 # meters (Little under 60 ft)
 
 # TODO(LF) review this
 UAS_ALTITUDE_SETPOINT = 9.2 # meters (little over 30 ft)
