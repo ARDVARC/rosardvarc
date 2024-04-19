@@ -1,9 +1,11 @@
 <?xml version="1.0"?>
 <launch>
+    <arg name="bagname" default="test_bag" doc="Bag name prefix"/>
     <include file="$(find rosardvarc)/launch/fsw_only.launch"/>
     <include file="$(find rosardvarc)/launch/camera_only.launch"/>
     <node name="read_raw_bluetooth_from_array" pkg="rosardvarc" type="read_raw_bluetooth_from_array.py" output="screen" respawn="true"/>
     <include file="$(find mavros)/launch/px4.launch">
         <arg name="fcu_url" value="udp://192.168.0.10:14560@192.168.0.3:14558"/>
     </include>
+    <node pkg="rosbag" type="record" name="rosbag_recorder" args="record -o $(arg bagname) -b 0 bluetooth/az_els mavros/local_position/pose estimation/direction_vectors_uas estimation/estimated_rgv_states state_machine/mission_states state_machine/state_machine_criteria state_machine/forced usb_cam/image_raw/compressed estimation/rgv_local_projections camera/recent_rgv_sightings mavros/state mavros/setpoint_position/local"/>
 </launch>
