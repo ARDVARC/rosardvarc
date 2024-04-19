@@ -38,6 +38,23 @@ generate_state_machine_criteria.setup()
 process_bluetooth.setup()
 projector.setup()
 
+# Configure MAVROS message intervals
+from mavros_msgs.srv import MessageInterval, MessageIntervalRequest, MessageIntervalResponse
+rospy.wait_for_service("mavros/set_message_interval")
+message_interval_service = rospy.ServiceProxy("mavros/set_message_interval", MessageInterval)
+attitude_message_interval_request = MessageIntervalRequest()
+attitude_message_interval_request.message_id = 31
+attitude_message_interval_request.message_rate = 50
+attitude_message_interval_response: MessageIntervalResponse = message_interval_service.call(attitude_message_interval_request)
+if not attitude_message_interval_response.success:
+    rospy.logerr("Failed to set attitude message interval")
+local_position_message_interval_request = MessageIntervalRequest()
+local_position_message_interval_request.message_id = 32
+local_position_message_interval_request.message_rate = 50
+local_position_message_interval_response: MessageIntervalResponse = message_interval_service.call(local_position_message_interval_request)
+if not local_position_message_interval_response.success:
+    rospy.logerr("Failed to set local position message interval")
+
 # Run the estimation loop until we die
 from FSW.config.constants import ESTIMATION_RATE
 rate = rospy.Rate(ESTIMATION_RATE)
