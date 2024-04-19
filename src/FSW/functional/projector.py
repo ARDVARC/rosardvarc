@@ -1,5 +1,6 @@
 import rospy
 from FSW.config.topic_names import RGV_PROJECTIONS, UAS_POSES, UAS_TO_RGV_DIRECTION_VECTORS
+from FSW.config.constants import MIN_PROJECTION_ALTITUDE
 from rosardvarc.msg import RgvLocalProjection, UasToRgvDirectionVectorUasFrame
 from geometry_msgs.msg import PoseStamped
 import numpy as np
@@ -24,6 +25,10 @@ def _uas_state_callback(msg: PoseStamped):
 def _direction_vector_callback(msg: UasToRgvDirectionVectorUasFrame):
     # If we don't have enough UAS readings to interpolate, give up
     if len(_uas_states) < 2:
+        return
+    
+    # Don't try to project if we are on the ground, it causes weird behavior
+    if _uas_states[-1].pose.position.z < MIN_PROJECTION_ALTITUDE:
         return
         
     # Get the UAS pose that best aligns with the time of the pointing vector

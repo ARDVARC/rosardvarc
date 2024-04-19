@@ -5,7 +5,7 @@ from sortedcontainers import SortedKeyList
 T = TypeVar('T')
 
 class SortedBuffer(SortedKeyList, Generic[T]):
-    def __init__(self, key: Callable[[T], float], iterable: Union[Iterable[T], None] = None, capacity: int = 50):
+    def __init__(self, key: Callable[[T], float], iterable: Union[Iterable[T], None] = None, capacity: int = 500):
         super().__init__(iterable, key)
         self.capacity = capacity
     

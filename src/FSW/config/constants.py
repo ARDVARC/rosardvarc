@@ -133,23 +133,30 @@ AERO_BACKYARD_APPROX_ALT = 1614.001932 # meters
 CENTER_SETPOINT = [0,0,0]
 HOME_SETPOINT = [-10,-10,0]
 
+
+"""Projector"""
+MIN_PROJECTION_ALTITUDE = UAS_ALTITUDE_SETPOINT/2
+
 #recalculating the setpoint happens very slow
 # but writing it happens hast
 CREATE_SETPOINT_RATE = 2.5 # 0.4 Hz
 PUBLISH_SETPOINT_RATE = 0.05 # 20 Hz (NOTE ! Must be greater than 2 hz)
 
 
+
 """Estimator"""
+ESTIMATION_RATE = 5 # Hz
+
 SPEED_THRESHOLD = 0.3 # m/s
 
-BLUETOOTH_WEIGHT = 10
+BLUETOOTH_WEIGHT = 4
 CAMERA_WEIGHT = 100
 IDEAL_TOTAL_WEIGHT = 200
 
 MAX_PLAUSIBLE_RGV_SPEED = 3 # m/s
 MISSION_AREA_HALF_WIDTH = 16.5 # m
 MISSION_AREA_FALSE_NORTH = np.deg2rad(20) # rad CW from north
-ESTIMATE_HISTORY_DURATION = 6 # s
+ESTIMATE_HISTORY_DURATION = 4 # s
 MAX_BLIND_FOLLOW_DURATION = 2 # s
 
 """Bluetooth"""
@@ -161,3 +168,7 @@ MAX_BLIND_FOLLOW_DURATION = 2 # s
 # Our assumption is that to align the bluetooth with the body frame,
 # we rotate the bluetooth soc by -90 degrees about the body frame y axis
 BLUETOOTH_2_BODY_ROT = Rotation.from_rotvec([0.0, np.pi/2, 0.0])
+
+# How much time to remove from reported bluetooth received times to get true bluetooth
+# received times
+BLUETOOTH_OFFSET: rospy.Duration = rospy.Duration.from_sec(0.7)

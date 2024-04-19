@@ -56,7 +56,8 @@ if not local_position_message_interval_response.success:
     rospy.logerr("Failed to set local position message interval")
 
 # Run the estimation loop until we die
-rate = rospy.Rate(2)
+from FSW.config.constants import ESTIMATION_RATE
+rate = rospy.Rate(ESTIMATION_RATE)
 now = rospy.Time.now()
 while not rospy.is_shutdown():
     estimate_rgv_state.publish_estimated_rgv_state()
