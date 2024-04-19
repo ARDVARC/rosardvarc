@@ -133,6 +133,12 @@ AERO_BACKYARD_APPROX_ALT = 1614.001932 # meters
 CENTER_SETPOINT = [0,0,0]
 HOME_SETPOINT = [-10,-10,0]
 
+#recalculating the setpoint happens very slow
+# but writing it happens hast
+CREATE_SETPOINT_RATE = 2.5 # 0.4 Hz
+PUBLISH_SETPOINT_RATE = 0.05 # 20 Hz (NOTE ! Must be greater than 2 hz)
+
+
 """Estimator"""
 SPEED_THRESHOLD = 0.3 # m/s
 
