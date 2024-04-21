@@ -54,8 +54,8 @@ class RGV_ID(IntEnum):
     RGVBOTH = 3
     
 ARUCO_ID2RGV_DICT: Dict[Tuple[str, int], RGV_ID] = {
-	("DICT_6X6_50", 5): RGV_ID.RGV1,
-    ("DICT_APRILTAG_36h11", 5): RGV_ID.RGV2
+	("DICT_4X4_50", 4): RGV_ID.RGV1,
+    ("DICT_4X4_50", 5): RGV_ID.RGV2
 }
     
 
@@ -69,7 +69,7 @@ ARUCO_ID2RGV_DICT: Dict[Tuple[str, int], RGV_ID] = {
 ARUCO_DICT = {
     ## Currently Not using the Commented out ones
     
-	# "DICT_4X4_50": cv2.aruco.DICT_4X4_50,
+	"DICT_4X4_50": cv2.aruco.DICT_4X4_50,
 	# "DICT_4X4_100": cv2.aruco.DICT_4X4_100,
 	# "DICT_4X4_250": cv2.aruco.DICT_4X4_250,
 	# "DICT_4X4_1000": cv2.aruco.DICT_4X4_1000,
@@ -77,7 +77,7 @@ ARUCO_DICT = {
 	# "DICT_5X5_100": cv2.aruco.DICT_5X5_100,
 	# "DICT_5X5_250": cv2.aruco.DICT_5X5_250,
 	# "DICT_5X5_1000": cv2.aruco.DICT_5X5_1000,
-	"DICT_6X6_50": cv2.aruco.DICT_6X6_50,
+	# "DICT_6X6_50": cv2.aruco.DICT_6X6_50,
 	# "DICT_6X6_100": cv2.aruco.DICT_6X6_100,
 	# "DICT_6X6_250": cv2.aruco.DICT_6X6_250,
 	# "DICT_6X6_1000": cv2.aruco.DICT_6X6_1000,
@@ -89,13 +89,13 @@ ARUCO_DICT = {
 	# "DICT_APRILTAG_16h5": cv2.aruco.DICT_APRILTAG_16h5,
 	# "DICT_APRILTAG_25h9": cv2.aruco.DICT_APRILTAG_25h9,
 	# "DICT_APRILTAG_36h10": cv2.aruco.DICT_APRILTAG_36h10,
-	"DICT_APRILTAG_36h11": cv2.aruco.DICT_APRILTAG_36h11
+	# "DICT_APRILTAG_36h11": cv2.aruco.DICT_APRILTAG_36h11
 }
 DICTIONARY = cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT_6X6_50)
 
 """State Machine Criteria"""
 RECENT_ESTIMATE_TIME_CUTOFF: rospy.Duration = rospy.Duration.from_sec(4)
-LOCALIZE_DURATION: rospy.Duration = rospy.Duration.from_sec(90)
+LOCALIZE_DURATION: rospy.Duration = rospy.Duration.from_sec(120)
 JOINT_DURATION: rospy.Duration = rospy.Duration.from_sec(240)
 RECENT_SIGHTING_TIME_CUTOFF: rospy.Duration = rospy.Duration.from_sec(2)
 MINIMUM_LOCALIZE_DURATION: rospy.Duration = rospy.Duration.from_sec(60)
