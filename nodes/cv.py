@@ -29,6 +29,7 @@ import time
 import rospy
 import genpy
 from FSW.config.topic_names import ANNOTATED_CAMERA_FRAMES, RECENT_RGV_SIGHTINGS, UAS_TO_RGV_DIRECTION_VECTORS, CAMERA_FRAMES
+from FSW.config.constants import CAMERA_DELAY
 from rosardvarc.msg import RecentSighting, UasToRgvDirectionVectorUasFrame
 from sensor_msgs.msg import Image
 from FSW.functional.process_frame import detect_ArUco_Direction_and_Pose, camera_frame_to_UAS_frame,my_estimatePoseSingleMarkers
@@ -87,7 +88,7 @@ def frame_callback(msg: Image):
         i += 1
     ##Recent Sighting Message Definition
     sighting = RecentSighting()
-    sighting.timestamp = msg.header.stamp
+    sighting.timestamp = msg.header.stamp - CAMERA_DELAY
     sighting.rgv_id = rgv_id_sum
     # TODO: Make this something reasonable based on id (TB 2021-04-07: I think that this is right but im not sure that this is the correct way to do this)
     rospy.logdebug("CV published an RGV sighting")

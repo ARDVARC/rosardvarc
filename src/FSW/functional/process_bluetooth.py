@@ -6,7 +6,7 @@ from scipy.spatial.transform import Rotation
 
 from rosardvarc.msg import UasToRgvDirectionVectorUasFrame, BluetoothAzimuthElevation
 from ..config.topic_names import UAS_TO_RGV_DIRECTION_VECTORS, RAW_BLUETOOTH
-from ..config.constants import BLUETOOTH_2_BODY_ROT, RGV_ID, MEAS_FROM_BLUETOOTH, BLUETOOTH_OFFSET
+from ..config.constants import BLUETOOTH_2_BODY_ROT, RGV_ID, MEAS_FROM_BLUETOOTH, BLUETOOTH_DELAY
 
 
 x_RGV1_buffer = collections.deque([],100)
@@ -58,7 +58,7 @@ def _bluetooth_callback(msg: BluetoothAzimuthElevation):
     
     pub_msg = UasToRgvDirectionVectorUasFrame()
     
-    pub_msg.timestamp = msg.timestamp- BLUETOOTH_OFFSET
+    pub_msg.timestamp = msg.timestamp- BLUETOOTH_DELAY
     pub_msg.rgv_id = msg.rgv_id
     pub_msg.measurement_source = MEAS_FROM_BLUETOOTH
     pub_msg.direction = UASToRgvDirectionVector_bluetooth

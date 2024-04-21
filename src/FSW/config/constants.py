@@ -149,14 +149,14 @@ ESTIMATION_RATE = 5 # Hz
 
 SPEED_THRESHOLD = 0.3 # m/s
 
-BLUETOOTH_WEIGHT = 4
+BLUETOOTH_WEIGHT = 10
 CAMERA_WEIGHT = 100
 IDEAL_TOTAL_WEIGHT = 200
 
 MAX_PLAUSIBLE_RGV_SPEED = 3 # m/s
 MISSION_AREA_HALF_WIDTH = 16.5 # m
 MISSION_AREA_FALSE_NORTH = np.deg2rad(20) # rad CW from north
-ESTIMATE_HISTORY_DURATION = 4 # s
+ESTIMATE_HISTORY_DURATION = 6 # s
 MAX_BLIND_FOLLOW_DURATION = 2 # s
 
 """Bluetooth"""
@@ -171,4 +171,5 @@ BLUETOOTH_2_BODY_ROT = Rotation.from_rotvec([0.0, np.pi/2, 0.0])
 
 # How much time to remove from reported bluetooth received times to get true bluetooth
 # received times
-BLUETOOTH_OFFSET: rospy.Duration = rospy.Duration.from_sec(0.7)
+BLUETOOTH_DELAY: rospy.Duration = rospy.Duration.from_sec(0.7)
+CAMERA_DELAY: rospy.Duration = rospy.Duration.from_sec(0.5)
