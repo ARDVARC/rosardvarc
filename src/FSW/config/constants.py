@@ -177,4 +177,4 @@ BLUETOOTH_2_BODY_ROT = Rotation.from_rotvec([0.0, np.pi/2, 0.0])
 # How much time to remove from reported bluetooth received times to get true bluetooth
 # received times
 BLUETOOTH_DELAY: rospy.Duration = rospy.Duration.from_sec(0.7)
-CAMERA_DELAY: rospy.Duration = rospy.Duration.from_sec(0.5)
+CAMERA_DELAY: rospy.Duration = rospy.Duration.from_sec(0)
