@@ -113,11 +113,16 @@ ORBITAL_PERIOD = 20  # seconds to complete a full orbit
 
 TIME_AT_ORBIT_POINT = 5  # [seconds] loiter at each point in the orbit for 5 seconds
 
-# TODO(LF) review this
-UAS_ALTITUDE_SETPOINT_JOINT = 9.2 # meters (Little under 60 ft)
-
-# TODO(LF) review this
+### Normal guidance behavior ###
 UAS_ALTITUDE_SETPOINT = 9.2 # meters (little over 30 ft)
+
+### Joint guidance behavior ###
+CAM_MIN_FOV_DEG = 47  # degrees
+CAM_MIN_FOV = CAM_MIN_FOV_DEG * (np.pi/180.0)  # radians
+MAX_ARUCO_RESOLVABLE_DISTANCE = 12  # meters TODO(LF): review this based on flight data
+UAS_ALTITUDE_SETPOINT_JOINT = 9.2 # meters (Little under 60 ft)
+JOINT_ORBITAL_PERIOD = 30
+JOINT_TIME_AT_ORBIT_POINT = 15
 
 # Magic Number that's the center of the aerospace backyard in lat/long
 # This is decimal lat/long, NOT mins, secs
