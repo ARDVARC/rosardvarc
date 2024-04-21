@@ -95,7 +95,7 @@ DICTIONARY = cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT_6X6_50)
 
 """State Machine Criteria"""
 RECENT_ESTIMATE_TIME_CUTOFF: rospy.Duration = rospy.Duration.from_sec(4)
-LOCALIZE_DURATION: rospy.Duration = rospy.Duration.from_sec(90)
+LOCALIZE_DURATION: rospy.Duration = rospy.Duration.from_sec(120)
 JOINT_DURATION: rospy.Duration = rospy.Duration.from_sec(240)
 RECENT_SIGHTING_TIME_CUTOFF: rospy.Duration = rospy.Duration.from_sec(2)
 MINIMUM_LOCALIZE_DURATION: rospy.Duration = rospy.Duration.from_sec(60)
