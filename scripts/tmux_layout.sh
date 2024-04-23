@@ -9,7 +9,7 @@ sleep 3
 # Open new tmux session. In first window, prepare to run the main FSW launch script
 tmux -2 new-session -d -x "$(tput cols)" -y "$(tput lines)" -s "GCS" -n "FSW" 'echo "REMEMBER TO FIX LOCAL ORIGIN, UPDATE MAVROS RATES, AND RUN ROSBAG!"; bash'
 sleep 2
-tmux send-keys "roslaunch rosardvarc fsw_and_io.launch bag_name:=CHANGE_THIS"
+tmux send-keys "roslaunch rosardvarc fsw_and_io.launch bagname:=CHANGE_THIS"
 
 # In second window, add loggers for
 # - Mission state

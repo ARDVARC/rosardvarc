@@ -107,11 +107,11 @@ RECENTLY_STOPPED_CUTOFF: rospy.Duration = rospy.Duration.from_sec(5)
 # ask Rob what this should be for optimal bluetooth measurements 
 # Aidan has some numbers that closer is better
 # ORBITAL_RADIUS_SINGLE = 1.0 # meters (ground distance)
-ORBITAL_RADIUS_SINGLE = 0.5 # meters (ground distance)
+ORBITAL_RADIUS_SINGLE = 1 # meters (ground distance)
 
-ORBITAL_PERIOD = 20  # seconds to complete a full orbit
+ORBITAL_PERIOD = 40  # seconds to complete a full orbit
 
-TIME_AT_ORBIT_POINT = 5  # [seconds] loiter at each point in the orbit for 5 seconds
+TIME_AT_ORBIT_POINT = 10  # [seconds] loiter at each point in the orbit for 5 seconds
 
 ### Normal guidance behavior ###
 UAS_ALTITUDE_SETPOINT = 9.2 # meters (little over 30 ft)
@@ -121,8 +121,8 @@ CAM_MIN_FOV_DEG = 47  # degrees
 CAM_MIN_FOV = CAM_MIN_FOV_DEG * (np.pi/180.0)  # radians
 MAX_ARUCO_RESOLVABLE_DISTANCE = 12  # meters TODO(LF): review this based on flight data
 UAS_ALTITUDE_SETPOINT_JOINT = 9.2 # meters (Little under 60 ft)
-JOINT_ORBITAL_PERIOD = 30
-JOINT_TIME_AT_ORBIT_POINT = 15
+JOINT_ORBITAL_PERIOD = 40
+JOINT_TIME_AT_ORBIT_POINT = 20
 
 # Magic Number that's the center of the aerospace backyard in lat/long
 # This is decimal lat/long, NOT mins, secs
@@ -135,17 +135,17 @@ AERO_BACKYARD_APPROX_ALT = 1614.001932 # meters
 # TODO(LF) review before flight because this will be the first setpoint sent and will also be
 # sent in null-type cases
 # this specifically is the point in local frame where the pilot is planning on having the drone in hold mode when the pilot switches to offboard mode
-CENTER_SETPOINT = [0,0,0]
+CENTER_SETPOINT = [0,0,10]
 HOME_SETPOINT = [-10,-10,0]
+
+#recalculating the setpoint happens very slow
+# but writing it happens hast
+CREATE_SETPOINT_RATE = 5 # 0.4 Hz
+PUBLISH_SETPOINT_RATE = 0.05 # 20 Hz (NOTE ! Must be greater than 2 hz)
 
 
 """Projector"""
 MIN_PROJECTION_ALTITUDE = UAS_ALTITUDE_SETPOINT/2
-
-#recalculating the setpoint happens very slow
-# but writing it happens hast
-CREATE_SETPOINT_RATE = 2.5 # 0.4 Hz
-PUBLISH_SETPOINT_RATE = 0.05 # 20 Hz (NOTE ! Must be greater than 2 hz)
 
 
 
