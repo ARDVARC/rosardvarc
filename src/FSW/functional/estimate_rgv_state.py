@@ -163,8 +163,12 @@ def _update_estimate(rgv_estimate: SingleRgvEstimate,
                      bluetooth_buffer: SortedBuffer[RgvLocalProjection],
                      camera_buffer: SortedBuffer[RgvLocalProjection],
                      new_rgv_projection: bool):
+    # This shouldn't matter by something something multithreading?
+    bluetooth_buffer_copy = [x for x in bluetooth_buffer]
+    camera_buffer_copy = [x for x in camera_buffer]
+    
     # Calculate confidence based on number of data points
-    rgv_estimate.confidence = (BLUETOOTH_WEIGHT * len(bluetooth_buffer) + CAMERA_WEIGHT * len(camera_buffer))/IDEAL_TOTAL_WEIGHT
+    rgv_estimate.confidence = (BLUETOOTH_WEIGHT * len(bluetooth_buffer_copy) + CAMERA_WEIGHT * len(camera_buffer_copy))/IDEAL_TOTAL_WEIGHT
     if rgv_estimate.confidence > 1:
         rgv_estimate.confidence = 1
     
@@ -173,13 +177,13 @@ def _update_estimate(rgv_estimate: SingleRgvEstimate,
         rgv_estimate.moving = True
         rgv_estimate.speed = 1
         return
-        
-    bluetooth_times = [proj.timestamp.to_sec() for proj in bluetooth_buffer]
-    bluetooth_xs = [proj.rgv_position_local[0] for proj in bluetooth_buffer]
-    bluetooth_ys = [proj.rgv_position_local[1] for proj in bluetooth_buffer]
-    camera_times = [proj.timestamp.to_sec() for proj in camera_buffer]
-    camera_xs = [proj.rgv_position_local[0] for proj in camera_buffer]
-    camera_ys = [proj.rgv_position_local[1] for proj in camera_buffer]
+    
+    bluetooth_times = [proj.timestamp.to_sec() for proj in bluetooth_buffer_copy]
+    bluetooth_xs = [proj.rgv_position_local[0] for proj in bluetooth_buffer_copy]
+    bluetooth_ys = [proj.rgv_position_local[1] for proj in bluetooth_buffer_copy]
+    camera_times = [proj.timestamp.to_sec() for proj in camera_buffer_copy]
+    camera_xs = [proj.rgv_position_local[0] for proj in camera_buffer_copy]
+    camera_ys = [proj.rgv_position_local[1] for proj in camera_buffer_copy]
     
     all_times = bluetooth_times + camera_times
     all_xs = bluetooth_xs + camera_xs
@@ -196,7 +200,7 @@ def _update_estimate(rgv_estimate: SingleRgvEstimate,
         rgv_estimate.timestamp = rospy.Time.now()
         return
     
-    weights = [BLUETOOTH_WEIGHT] * len(bluetooth_buffer) + [CAMERA_WEIGHT] * len(camera_buffer)
+    weights = [BLUETOOTH_WEIGHT] * len(bluetooth_buffer_copy) + [CAMERA_WEIGHT] * len(camera_buffer_copy)
     
     rgv_estimate.x_slope, rgv_estimate.x_intercept = np.polyfit(all_times, all_xs, 1, w=weights)
     rgv_estimate.y_slope, rgv_estimate.y_intercept = np.polyfit(all_times, all_ys, 1, w=weights)

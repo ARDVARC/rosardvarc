@@ -60,5 +60,11 @@ from FSW.config.constants import ESTIMATION_RATE
 rate = rospy.Rate(ESTIMATION_RATE)
 now = rospy.Time.now()
 while not rospy.is_shutdown():
-    estimate_rgv_state.publish_estimated_rgv_state()
+    try:
+        estimate_rgv_state.publish_estimated_rgv_state()
+    except KeyboardInterrupt as e:
+        raise e
+    except Exception as e:
+        rospy.logwarn("Estimator issue:")
+        rospy.logwarn(e)
     rate.sleep()
