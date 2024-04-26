@@ -1,5 +1,5 @@
 ## --- Topic Names ---
-ANNOTATED_CAMERA_FRAMES = "camera/annotated_frames"
+# ANNOTATED_CAMERA_FRAMES = "camera/annotated_frames"
 CAMERA_FRAMES = "usb_cam/image_raw"
 BAGGED_FRAMES = "camera/frames_to_bag"
 UAS_POSES = "mavros/local_position/pose"

@@ -28,7 +28,7 @@ been seen recently.
 import time
 import rospy
 import genpy
-from FSW.config.topic_names import ANNOTATED_CAMERA_FRAMES, RECENT_RGV_SIGHTINGS, UAS_TO_RGV_DIRECTION_VECTORS, CAMERA_FRAMES
+from FSW.config.topic_names import RECENT_RGV_SIGHTINGS, UAS_TO_RGV_DIRECTION_VECTORS, CAMERA_FRAMES
 from FSW.config.constants import CAMERA_DELAY
 from rosardvarc.msg import RecentSighting, UasToRgvDirectionVectorUasFrame
 from sensor_msgs.msg import Image
@@ -63,9 +63,9 @@ def frame_callback(msg: Image):
 
     ##Annotated Frame Message Definition
     # TODO: Make this something reasonable based on detection_info.annotated_camera_frame (TB 2021-04-07: I think that this is right but im not sure that this is the correct way to do this)
-    annotated_frame = bridge.cv2_to_imgmsg(detection_info.annotated_camera_frame, encoding="rgb8")
-    pub_frame.publish(annotated_frame)
-    rospy.logdebug("CV published an annotated frame")
+    # annotated_frame = bridge.cv2_to_imgmsg(detection_info.annotated_camera_frame, encoding="rgb8")
+    # pub_frame.publish(annotated_frame)
+    # rospy.logdebug("CV published an annotated frame")
 
 
     if detection_info.rgv_ids is None:
@@ -98,7 +98,7 @@ def frame_callback(msg: Image):
 ## Initialize the necessary nodes and the publishers.
 rospy.init_node("cv_node")
 bridge = CvBridge()
-pub_frame = rospy.Publisher(ANNOTATED_CAMERA_FRAMES, Image, queue_size=64)
+# pub_frame = rospy.Publisher(ANNOTATED_CAMERA_FRAMES, Image, queue_size=64)
 ## TODO Implement the publisher for the recent sightings.
 pub_sightings = rospy.Publisher(RECENT_RGV_SIGHTINGS, RecentSighting, queue_size=64)
 ## TODO Implement the publisher for the pointing vector.

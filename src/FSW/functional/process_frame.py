@@ -40,7 +40,7 @@ from typing import Optional, List, Any
 @dataclass
 class DetectionInfo():
     ##TODO Combine the IDS and Dir Vecs into a list of tuples
-    annotated_camera_frame: Any
+    # annotated_camera_frame: Any
     rgv_ids: List[constants.RGV_ID]
     direction_vectors: List[np.ndarray]
     
@@ -50,7 +50,7 @@ class DetectionInfo():
 def detect_ArUco_Direction_and_Pose(frame) -> DetectionInfo: 
     direction_vectors: List[np.ndarray] = []
     ids_list: List[constants.RGV_ID] = []
-    frame_copy = frame.copy()
+    # frame_copy = frame.copy()
 
     for aruco_type, dictionary_id in constants.ARUCO_DICT.items():
 
@@ -109,7 +109,7 @@ def detect_ArUco_Direction_and_Pose(frame) -> DetectionInfo:
                 rospy.logdebug(f"ArUco ID: {markerID} Center: ({cX}, {cY})")
 
                 ## TODO Might want to put this in the for loop for FrameAxes
-                cv2.aruco.drawDetectedMarkers(frame_copy, corners) #Draw the detected markers
+                # cv2.aruco.drawDetectedMarkers(frame_copy, corners) #Draw the detected markers
 
                 
 
@@ -123,7 +123,7 @@ def detect_ArUco_Direction_and_Pose(frame) -> DetectionInfo:
                 (rvec, tvec, _) = my_estimatePoseSingleMarkers(markerCorner, constants.MARKER_SIZE, constants.INTRINSICS_PI_CAMERA, constants.DISTORTION)                
                 rvec = np.array(rvec)
                 tvec = np.array(tvec)
-                cv2.drawFrameAxes(frame_copy, constants.INTRINSICS_PI_CAMERA, constants.DISTORTION, rvec, tvec, 0.1) 
+                # cv2.drawFrameAxes(frame_copy, constants.INTRINSICS_PI_CAMERA, constants.DISTORTION, rvec, tvec, 0.1) 
         
                 ## TODO Do math to get direction_vector (TB 2021-09-20: Added a MVP implementation of the possible DCM and Translation Vector)
                 ## TODO Configure the direction_vector to be in the UAS Frame (TB 2021-09-20: Roughly Executed)
@@ -135,7 +135,8 @@ def detect_ArUco_Direction_and_Pose(frame) -> DetectionInfo:
                 tvec_hat_UASFrame = tvec_UASFrame / np.linalg.norm(tvec_UASFrame)
                 direction_vectors.append(tvec_hat_UASFrame)
                 
-    return DetectionInfo(frame_copy, ids_list, direction_vectors)
+    # return DetectionInfo(frame_copy, ids_list, direction_vectors)
+    return DetectionInfo(ids_list, direction_vectors)
 
 
 def camera_frame_to_UAS_frame(position: np.ndarray) -> np.ndarray:
@@ -206,7 +207,7 @@ if __name__ == "__main__":
 
         Detection_Info = detect_ArUco_Direction_and_Pose(image)
              
-        image = Detection_Info.annotated_camera_frame
+        # image = Detection_Info.annotated_camera_frame
         ##Show the image with the estimated pose, USE IF ONLY FEW IMAGE
         cv2.imshow('Estimated Pose', image)
         rospy.logdebug(Detection_Info.rgv_ids)
