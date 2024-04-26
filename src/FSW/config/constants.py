@@ -115,6 +115,7 @@ TIME_AT_ORBIT_POINT = 10  # [seconds] loiter at each point in the orbit for 5 se
 
 ### Normal guidance behavior ###
 UAS_ALTITUDE_SETPOINT = 9.2 # meters (little over 30 ft)
+CONSTANT_YAW_RATE = 10 # degrees per second
 
 ### Joint guidance behavior ###
 CAM_MIN_FOV_DEG = 47  # degrees

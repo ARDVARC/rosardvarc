@@ -121,6 +121,13 @@ def _create_setpoint_timer_callback(event=None):
     toBeWritten_setpoint.pose.position.x = x_set
     toBeWritten_setpoint.pose.position.y = y_set
     toBeWritten_setpoint.pose.position.z = z_set
+    
+    orientation = Rotation.from_euler("Z", (rospy.Time.now().to_sec() * CONSTANT_YAW_RATE) % 360, True).as_quat()
+    toBeWritten_setpoint.pose.orientation.x = orientation[0]
+    toBeWritten_setpoint.pose.orientation.y = orientation[1]
+    toBeWritten_setpoint.pose.orientation.z = orientation[2]
+    toBeWritten_setpoint.pose.orientation.w = orientation[3]
+
 
 
 def _publish_setpoint_timer_callback(event=None):
